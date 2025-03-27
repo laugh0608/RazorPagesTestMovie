@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 // using Microsoft.Extensions.DependencyInjection;
 using RazorPagesTestMovie.Data;
+using RazorPagesTestMovie.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -9,6 +11,14 @@ builder.Services.AddDbContext<RazorPagesTestMovieContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("RazorPagesTestMovieContext") ?? throw new InvalidOperationException("Connection string 'RazorPagesTestMovieContext' not found.")));
 
 var app = builder.Build();
+
+// 添加种子初始值设定项
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    SeedData.Initialize(services);
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
