@@ -1,10 +1,17 @@
+## 自定义
+/RazorPagesTestMovie/bin/
+/RazorPagesTestMovie/bin/*
+/RazorPagesTestMovie/obj/
+/RazorPagesTestMovie/obj/*
+/.idea/
+/.idea/*
+/.git/
+/.git/*
+/.vs/
+/.vs/*
+## 默认
 bin/
-RazorPagesTestMovie/bin/
 obj/
-RazorPagesTestMovie/obj/
-RazorPagesTestMovie/obj/*
-.idea/
-.idea/*
 /packages/
 riderModule.iml
 /_ReSharper.Caches/
