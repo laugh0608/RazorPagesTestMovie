@@ -12,7 +12,7 @@ builder.Services.AddDbContext<RazorPagesTestMovieContext>(options =>
 
 var app = builder.Build();
 
-// 添加种子初始值设定项
+// 添加数据库种子初始值设定项
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
