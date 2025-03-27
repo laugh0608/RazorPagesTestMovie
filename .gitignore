@@ -2,6 +2,7 @@ bin/
 RazorPagesTestMovie/bin/
 obj/
 RazorPagesTestMovie/obj/
+RazorPagesTestMovie/obj/*
 /packages/
 riderModule.iml
 /_ReSharper.Caches/
