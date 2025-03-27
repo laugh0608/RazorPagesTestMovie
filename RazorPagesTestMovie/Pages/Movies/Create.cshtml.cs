@@ -1,20 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+// using System;
+// using System.Collections.Generic;
+// using System.Linq;
+// using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using RazorPagesTestMovie.Data;
+// using Microsoft.AspNetCore.Mvc.Rendering;
+// using RazorPagesTestMovie.Data;
 using RazorPagesTestMovie.Models;
 
 namespace RazorPagesTestMovie.Pages.Movies
 {
     public class CreateModel : PageModel
     {
-        private readonly RazorPagesTestMovie.Data.RazorPagesTestMovieContext _context;
+        private readonly Data.RazorPagesTestMovieContext _context;
 
-        public CreateModel(RazorPagesTestMovie.Data.RazorPagesTestMovieContext context)
+        public CreateModel(Data.RazorPagesTestMovieContext context)
         {
             _context = context;
         }

@@ -9,6 +9,7 @@
 /.git/*
 /.vs/
 /.vs/*
+RazorPagesTestMovie.sln.DotSettings.user
 
 ## 默认
 bin/
