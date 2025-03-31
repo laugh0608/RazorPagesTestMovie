@@ -17,6 +17,7 @@ public static class SeedData
             }
 
             // Look for any movies.
+            // 如果数据库中有任何电影，则会返回种子初始值设定项，并且不会添加任何电影
             if (context.Movie.Any())
             {
                 return;   // DB has been seeded

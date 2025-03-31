@@ -8,14 +8,19 @@ var builder = WebApplication.CreateBuilder(args);
 // 为容器添加服务
 builder.Services.AddRazorPages();
 // 基架工具自动创建数据库上下文并将其注册到依赖关系注入容器
+// RazorPagesTestMovieContext 对象处理连接到数据库并将 Movie 对象映射到数据库记录的任务
+// ASP.NET Core 配置系统会读取 ConnectionString 键。 进行本地开发时，配置从 appsettings.json 文件获取连接字符串
 builder.Services.AddDbContext<RazorPagesTestMovieContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("RazorPagesTestMovieContext") ?? throw new InvalidOperationException("Connection string 'RazorPagesTestMovieContext' not found.")));
 var app = builder.Build();
 
 // 添加数据库种子初始值设定项
+// 从依赖注入 (DI) 容器中获取数据库上下文实例
 using (var scope = app.Services.CreateScope())
 {
+    // 调用 seedData.Initialize 方法，并向其传递数据库上下文实例
     var services = scope.ServiceProvider;
+    // Seed 方法完成时释放上下文。 using 语句将确保释放上下文
     SeedData.Initialize(services);
 }
 
