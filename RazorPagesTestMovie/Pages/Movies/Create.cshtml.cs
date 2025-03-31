@@ -28,6 +28,7 @@ namespace RazorPagesTestMovie.Pages.Movies
         public Movie Movie { get; set; } = default!;
 
         // For more information, see https://aka.ms/RazorPagesCRUD.
+        // 当返回类型是 IActionResult 或 Task<IActionResult> 时，必须提供返回语句
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)

@@ -3,39 +3,40 @@ using Microsoft.EntityFrameworkCore;
 using RazorPagesTestMovie.Data;
 using RazorPagesTestMovie.Models;
 
+// 创建一个带有预配置默认值的 WebApplicationBuilder，向 Razor 添加 Pages 支持，并生成应用
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
+// 为容器添加服务
 builder.Services.AddRazorPages();
+// 基架工具自动创建数据库上下文并将其注册到依赖关系注入容器
 builder.Services.AddDbContext<RazorPagesTestMovieContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("RazorPagesTestMovieContext") ?? throw new InvalidOperationException("Connection string 'RazorPagesTestMovieContext' not found.")));
-
 var app = builder.Build();
 
 // 添加数据库种子初始值设定项
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-
     SeedData.Initialize(services);
 }
 
-// Configure the HTTP request pipeline.
+// 异常终结点设置为 /Error，并且当应用未在开发模式中运行时，启用 HSTS 协议
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    // HSTS 的默认值为 30 天，在生产情况下，需要更改该值，详见：https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
+// 将 HTTP 请求重定向到 HTTPS
 app.UseHttpsRedirection();
-
+// 向中间件管道添加路由匹配
 app.UseRouting();
-
+// 授权用户访问安全资源，此应用不使用授权，因此可删除此行
 app.UseAuthorization();
-
+// 优化应用中静态资产的交付，例如 HTML、CSS、图像和 JavaScript
 app.MapStaticAssets();
+// 为 Razor Pages 配置终结点路由
 app.MapRazorPages()
     .WithStaticAssets();
-
+// 运行应用
 app.Run();
