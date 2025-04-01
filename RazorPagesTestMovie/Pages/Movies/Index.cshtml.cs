@@ -38,8 +38,13 @@ namespace RazorPagesTestMovie.Pages.Movies
         // OnGetAsync 或 OnGet 在 Razor 页面上调用，以初始化该页面的状态
         public async Task OnGetAsync()
         {
+            // LINQ 查询，可从数据库中检索所有流派
+            IQueryable<string> genreQuery = from m in _context.Movie
+                orderby m.Genre
+                select m.Genre;
+            
             // Movie = await _context.Movie.ToListAsync();
-            // 创建 LINQ 查询用于选择电影
+            // 创建 LINQ 查询用于选择电影标题
             var movies = from m in _context.Movie
                 select m;
             // 如果 SearchString 属性不为 null 或空，则电影查询会修改为根据搜索字符串进行筛选
@@ -49,7 +54,16 @@ namespace RazorPagesTestMovie.Pages.Movies
                 //  Lambda 在基于方法的 LINQ 查询中用作标准查询运算符方法的参数，如 Where 方法或 Contains
                 movies = movies.Where(s => s.Title.Contains(SearchString));
             }
+            // 同上
+            if (!string.IsNullOrEmpty(MovieGenre))
+            {
+                movies = movies.Where(x => x.Genre == MovieGenre);
+            }
 
+            // 按流派查询
+            // 流派的 SelectList 是通过投影不包含重复值的流派创建的
+            Genres = new SelectList(await genreQuery.Distinct().ToListAsync());
+            // 按标题查询
             Movie = await movies.ToListAsync();
         }
         
