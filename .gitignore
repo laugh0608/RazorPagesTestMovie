@@ -9,6 +9,8 @@
 /.git/*
 /.vs/
 /.vs/*
+/.vscode/
+/.vscode/*
 RazorPagesTestMovie.sln.DotSettings.user
 
 ## 默认
