@@ -13,9 +13,9 @@ namespace RazorPagesTestMovie.Pages.Movies
 {
     public class EditModel : PageModel
     {
-        private readonly RazorPagesTestMovie.Data.RazorPagesTestMovieContext _context;
+        private readonly RazorPagesTestMovieContext _context;
 
-        public EditModel(RazorPagesTestMovie.Data.RazorPagesTestMovieContext context)
+        public EditModel(RazorPagesTestMovieContext context)
         {
             _context = context;
         }
